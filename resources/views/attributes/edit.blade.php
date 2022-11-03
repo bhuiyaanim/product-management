@@ -4,12 +4,12 @@
     <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-sm-6">
-        <h1 class="m-0">Categories</h1>
+        <h1 class="m-0">Product Attributes</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Category Update</li>
+            <li class="breadcrumb-item active">Attribute Create</li>
         </ol>
         </div><!-- /.col -->
     </div><!-- /.row -->
@@ -22,15 +22,15 @@
         <div class="col-lg-6">
             <div class="card card-primary card-outline">
                 <div class="card-header">
-                    <h5 class="m-0">Update Category</h5>
+                    <h5 class="m-0">Update Attribute</h5>
                 </div>
-                <form role="form" action="{{ route('categories.update', $category->id) }}" method="post">
+                <form role="form" action="{{ route('attributes.update', $attribute->id) }}" method="post">
                     @csrf
                     @method('PUT')
                     <div class="card-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Name</label>
-                            <input type="text" name="name" value="{{ $category->name }}" class="form-control" placeholder="Enter category name">
+                            <input type="text" name="name" value="{{ $attribute->name }}" class="form-control" placeholder="Enter attribute name">
                             @if($errors->has('name'))
                                 <span class="text-danger">{{ $errors->first('name') }}</span>
                             @endif

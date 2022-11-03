@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use \App\Http\Controllers\CategoriesController;
+use \App\Http\Controllers\AttributesController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,4 +32,6 @@ Route::middleware([
 Route::middleware(['auth:sanctum'])->group(function() {
     // CATEGORY
     Route::resource('categories', CategoriesController::class);
+    // ATTRIBUTE
+    Route::resource('attributes', AttributesController::class);
 });
