@@ -21,7 +21,7 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::with([
-                'productImage'
+                'productImages'
             ])->get();
         return view('products.index', compact('products'));
     }
@@ -109,9 +109,8 @@ class ProductsController extends Controller
             }
         }
 
-        
-
-        return $request->all();
+        flash('Product created successfully')->success();
+        return back();
     }
 
     /**
@@ -122,7 +121,13 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::where('id', $id)->with([
+            'productCategories.category', 'productAttributes.attribute', 'productImages'
+        ])->first();
+
+        $productAttributeArrayList = ProductAttribute::where('product_id', $product->id)->select('attribute_id')->distinct()->with(['attribute'])->get()->toArray();
+        
+        return view('products.show', compact('product', 'productAttributeArrayList'));
     }
 
     /**
@@ -156,6 +161,9 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product->delete();
+        flash('Product deleted successfully')->success();
+        return back();
     }
 }

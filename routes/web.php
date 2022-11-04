@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\CategoriesController;
 use \App\Http\Controllers\AttributesController;
 use \App\Http\Controllers\ProductsController;
+use \App\Http\Controllers\LogoutController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,6 +30,9 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+// logout
+Route::post('/logout', [LogoutController::class, 'destroy'])->name('logout');
 
 Route::middleware(['auth:sanctum'])->group(function() {
     // CATEGORY
