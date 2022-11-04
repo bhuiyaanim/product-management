@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Http\Requests\AttributesRequest;
 use App\Models\Attribute;
 
@@ -103,5 +104,15 @@ class AttributesController extends Controller
 
         flash('Attribute deleted successfully')->success();
         return redirect()->route('attributes.index');
+    }
+
+    // HANDEL AJAX REQUEST
+    public function getAttributesJson() {
+        $attributes = Attribute::all();
+
+        return response()->json([
+            'success' => true,
+            'data' => $attributes,
+        ], Response::HTTP_OK);
     }
 }

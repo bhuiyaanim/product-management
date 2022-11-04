@@ -14,10 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 use \App\Http\Controllers\CategoriesController;
 use \App\Http\Controllers\AttributesController;
+use \App\Http\Controllers\ProductsController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::middleware([
     'auth:sanctum',
@@ -32,6 +33,12 @@ Route::middleware([
 Route::middleware(['auth:sanctum'])->group(function() {
     // CATEGORY
     Route::resource('categories', CategoriesController::class);
+    Route::get('/api/categories', [CategoriesController::class, 'getCategoriesJson']);
+    
     // ATTRIBUTE
     Route::resource('attributes', AttributesController::class);
+    Route::get('/api/attributes', [AttributesController::class, 'getAttributesJson']);
+
+    // Product
+    Route::resource('products', ProductsController::class);
 });
