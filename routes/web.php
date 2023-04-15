@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use \App\Http\Controllers\CategoriesController;
+use \App\Http\Controllers\BrandsController;
 use \App\Http\Controllers\AttributesController;
 use \App\Http\Controllers\ProductsController;
 use \App\Http\Controllers\LogoutController;
@@ -38,6 +39,9 @@ Route::middleware(['auth:sanctum'])->group(function() {
     // CATEGORY
     Route::resource('categories', CategoriesController::class);
     Route::get('/api/categories', [CategoriesController::class, 'getCategoriesJson']);
+
+    // BRAND
+    Route::resource('brands', BrandsController::class);
     
     // ATTRIBUTE
     Route::resource('attributes', AttributesController::class);
