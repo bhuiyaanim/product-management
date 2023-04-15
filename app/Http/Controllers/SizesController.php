@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Http\Requests\AttributesRequest;
-use App\Models\Attribute;
+use App\Http\Requests\SizesRequest;
+use App\Models\Size;
 
-class AttributesController extends Controller
+class SizesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class AttributesController extends Controller
      */
     public function index()
     {
-        $attributes = Attribute::orderby('created_at', 'DESC')->get();
-        return view('attributes.index', compact('attributes'));
+        $sizes = Size::orderby('created_at', 'DESC')->get();
+        return view('sizes.index', compact('sizes'));
     }
 
     /**
@@ -27,7 +27,7 @@ class AttributesController extends Controller
      */
     public function create()
     {
-        return view('attributes.create');
+        return view('sizes.create');
     }
 
     /**
@@ -36,13 +36,13 @@ class AttributesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AttributesRequest $request)
+    public function store(Request $request)
     {
-        $attribute = new Attribute();
-        $attribute->name = $request->name;
-        $attribute->save();
+        $size = new Size();
+        $size->size = $request->size;
+        $size->save();
 
-        flash('Attribute created successfully')->success();
+        flash('Size created successfully')->success();
         return back();
     }
 
@@ -65,8 +65,8 @@ class AttributesController extends Controller
      */
     public function edit($id)
     {
-        $attribute = Attribute::findOrFail($id);
-        return view('attributes.edit', compact('attribute'));
+        $size = Size::findOrFail($id);
+        return view('sizes.edit', compact('size'));
     }
 
     /**
@@ -80,15 +80,15 @@ class AttributesController extends Controller
     {
         // Validation
         $this->validate($request, [
-            'name' => 'required|min:2|max:50|unique:attributes,name,' . $id
+            'size' => 'required|min:2|max:50|unique:sizes,size,' . $id
         ]);
         
-        $attribute = Attribute::findOrFail($id);
-        $attribute->name = $request->name;
-        $attribute->save();
+        $size = Size::findOrFail($id);
+        $size->size = $request->size;
+        $size->save();
 
-        flash('attribute updated successfully')->success();
-        return redirect()->route('attributes.index');
+        flash('Size updated successfully')->success();
+        return redirect()->route('sizes.index');
     }
 
     /**
@@ -99,20 +99,10 @@ class AttributesController extends Controller
      */
     public function destroy($id)
     {
-        $attribute = Attribute::findOrFail($id);
-        $attribute->delete();
+        $size = Size::findOrFail($id);
+        $size->delete();
 
-        flash('Attribute deleted successfully')->success();
-        return redirect()->route('attributes.index');
-    }
-
-    // HANDEL AJAX REQUEST
-    public function getAttributesJson() {
-        $attributes = Attribute::all();
-
-        return response()->json([
-            'success' => true,
-            'data' => $attributes,
-        ], Response::HTTP_OK);
+        flash('Size deleted successfully')->success();
+        return redirect()->route('sizes.index');
     }
 }

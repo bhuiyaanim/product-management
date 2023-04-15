@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 use \App\Http\Controllers\CategoriesController;
 use \App\Http\Controllers\BrandsController;
-use \App\Http\Controllers\AttributesController;
+use \App\Http\Controllers\SizesController;
 use \App\Http\Controllers\ProductsController;
 use \App\Http\Controllers\LogoutController;
 
@@ -42,10 +42,9 @@ Route::middleware(['auth:sanctum'])->group(function() {
 
     // BRAND
     Route::resource('brands', BrandsController::class);
-    
-    // ATTRIBUTE
-    Route::resource('attributes', AttributesController::class);
-    Route::get('/api/attributes', [AttributesController::class, 'getAttributesJson']);
+
+    // SIZE
+    Route::resource('sizes', SizesController::class);
 
     // Product
     Route::resource('products', ProductsController::class);
