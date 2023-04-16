@@ -7,11 +7,11 @@ import * as mutations from '../../mutation-types'
 import Axios from 'axios'
 
 export default {
-    [actions.GET_ATTRIBUTES]({ commit }) {
-        Axios.get('/api/attributes')
+    [actions.GET_BRANDS]({ commit }) {
+        Axios.get('/api/brands')
             .then(res=>{
                 if (res.data.success == true) {
-                    commit(mutations.SET_ATTRIBUTES, res.data.data)
+                    commit(mutations.SET_BRANDS, res.data.data)
                 }
             })
             .catch(err=>{

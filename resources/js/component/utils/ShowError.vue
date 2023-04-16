@@ -3,7 +3,7 @@
         <div class="alert alert-danger" role="alert">
             <ul>
                 <li v-for="(item, index) in getErrors" :key="index">
-                    {{ item }}
+                    {{ item[0] }}
                 </li>
             </ul>
         </div>

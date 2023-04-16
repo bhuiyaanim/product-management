@@ -5,7 +5,7 @@
         <div class="col-sm-6">
             <div class="card card-primary card-outline">
                 <div class="card-header">
-                    <h5 class="m-0">Create Product</h5>
+                    <h5 class="m-0">Edit Product</h5>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
@@ -34,6 +34,7 @@
                     </div>
                     <div class="form-group">
                         <label>Product Image <span class="text-danger">*</span> </label>
+                        <img class="old-image" :src="this.product.product_image">
                         <input @change="selectImage" type="file" class="form-control" placeholder="Upload product image">
                     </div>
                     <div class="form-group">
@@ -103,6 +104,7 @@
     
     export default {
         components: {Select2, Select2MultipleControl, ShowError},
+        props: ['product'],
         data(){
             return {
                 form: {
@@ -132,6 +134,19 @@
             // get sizes
             store.dispatch(actions.GET_SIZES)
 
+            // set old data
+            if(this.product) {
+                this.form.name = this.product.name
+                this.form.category_id = this.product.category_id
+                this.form.brand_id = this.product.brand_id
+                this.form.sku = this.product.sku
+                this.form.cost_price = this.product.cost_price
+                this.form.retail_price = this.product.retail_price
+                this.form.year = this.product.year
+                this.form.description = this.product.description
+                this.form.status = this.product.status
+                this.form.items = this.product.product_stocks
+            }
         },
         computed: {
             getCategories () {
@@ -164,6 +179,7 @@
             // submit
             submitForm() {
                 let data = new FormData();
+                data.append('_method', 'PUT')
                 data.append('name', this.form.name)
                 data.append('category_id', this.form.category_id)
                 data.append('brand_id', this.form.brand_id)
@@ -176,9 +192,20 @@
                 data.append('status', this.form.status)
                 data.append('items', JSON.stringify(this.form.items))
 
-                store.dispatch(actions.ADD_PRODUCT, data)
+                let payLoad = {
+                    data: data,
+                    id: this.product.id
+                }
+
+                store.dispatch(actions.EDIT_PRODUCT, payLoad)
             }
         }
 
     }
 </script>
+
+<style scoped>
+    .old-image {
+        width: 100px;
+    }
+</style>

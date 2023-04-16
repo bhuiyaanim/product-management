@@ -105,4 +105,13 @@ class BrandsController extends Controller
         flash('Brand deleted successfully')->success();
         return redirect()->route('brands.index');
     }
+
+    public function getBrandsJson() {
+        $brands = Brand::all();
+
+        return response()->json([
+            'success' => true,
+            'data' => $brands,
+        ], Response::HTTP_OK);
+    }
 }

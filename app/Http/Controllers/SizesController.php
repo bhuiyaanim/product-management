@@ -105,4 +105,13 @@ class SizesController extends Controller
         flash('Size deleted successfully')->success();
         return redirect()->route('sizes.index');
     }
+
+    public function getSizesJson() {
+        $sizes = Size::all();
+
+        return response()->json([
+            'success' => true,
+            'data' => $sizes,
+        ], Response::HTTP_OK);
+    }
 }

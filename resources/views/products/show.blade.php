@@ -2,87 +2,100 @@
 @section('content')
 <div class="content-header">
     <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">Products</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Product Show</li>
-                </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
+    <div class="row mb-2">
+        <div class="col-sm-6">
+        <h1 class="m-0">Product Show</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+            <li class="breadcrumb-item active">Product Show</li>
+        </ol>
+        </div><!-- /.col -->
+    </div><!-- /.row -->
     </div><!-- /.container-fluid -->
 </div>
 
-
-
-
-<!-- Main content -->
-<section class="content">
-    <!-- Default box -->
-    <div class="card card-solid">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-12 col-sm-6">
-                    <h3 class="d-inline-block d-sm-none">{{ $product->name }}</h3>
-                    <div class="col-12">
-                        <img src="{{ asset('storage/productImage/'.$product->productImages[0]->product_image) }}" class="product-image" alt="Product Image">
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h5 class="m-0">Product Info</h5>
                     </div>
-                    <div class="col-12 product-image-thumbs">
-                        @foreach($product->productImages as $key => $productImage)
-                            <?php $activeClass = ''; ?>
-                            @if($key == 0)
-                                <?php $activeClass = 'active'; ?>
-                            @endif
-                            <div class="product-image-thumb ".{{ $activeClass }}><img src="{{ asset('storage/productImage/'.$productImage->product_image) }}" alt="Product Image"></div>
-                        @endforeach
+                    <div class="card-body">
+                        <table class="table table-sm table-bordered">
+                            <tr>
+                                <td>Product name</td>
+                                <td>{{ $product->name ?? '' }}</td>
+                            </tr>
+                            <tr>
+                                <td>Category</td>
+                                <td>{{ $product->category->name ?? '' }}</td>
+                            </tr>
+                            <tr>
+                                <td>Brand</td>
+                                <td>{{ $product->brand->name ?? '' }}</td>
+                            </tr>
+                            <tr>
+                                <td>SKU</td>
+                                <td>{{ $product->sku ?? '' }}</td>
+                            </tr>
+                            <tr>
+                                <td>Cost price ($)</td>
+                                <td>{{ $product->cost_price ?? '' }}</td>
+                            </tr>
+                            <tr>
+                                <td>Retail price ($)</td>
+                                <td>{{ $product->retail_price ?? '' }}</td>
+                            </tr>
+                            <tr>
+                                <td>Year</td>
+                                <td>{{ $product->year ?? '' }}</td>
+                            </tr>
+                            <tr>
+                                <td>Description</td>
+                                <td>{{ $product->description ?? '' }}</td>
+                            </tr>
+                            <tr>
+                                <td>Status</td>
+                                <td>{{ $product->status ? 'Active' : 'Inactive' }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-sm btn-dark" href="{{ route('products.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
                     </div>
                 </div>
-                <div class="col-12 col-sm-6">
-                    <h3 class="my-3">{{ $product->name }}</h3>
-                    <p><strong>Slue: </strong>{{ $product->slug }}</p>
-                    <hr>
-                    <h4>Product Category</h4>
-                    <div class="row">
-                        @foreach($product->productCategories as $productCategory)
-                            <div class="col-sm-2">
-                            <p class="btn btn-default text-center">{{ $productCategory->category->name }}</p>
-                            </div>
-                        @endforeach
+            </div>
+            <div class="col-sm-6">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h5 class="m-0">Image</h5>
                     </div>
-                    <hr>
-                    @foreach($productAttributeArrayList as $productAttributeArray)
-                        <div class="pb-2">
-                            <h4>Available {{ $productAttributeArray['attribute']['name'] }}</h4>
-                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                @foreach($product->productAttributes as $productAttribute)
-                                    @if($productAttributeArray['attribute_id'] == $productAttribute->attribute_id)
-                                        <label class="btn btn-default text-center active">
-                                            <input type="radio" name="color_option" id="color_option_a1" autocomplete="off" checked>
-                                            {{ $productAttribute->attribute_property }}
-                                        </label>
-                                    @endif
-                                @endforeach
-                            </div>
-                        </div>
-                    @endforeach
-                    <div class="bg-gray py-2 px-3 mt-4">
-                        <h2 class="mb-0">
-                            {{ $product->price }}
-                        </h2>
-                        <h4 class="mt-0">
-                            <small>Ex Tax: {{ $product->price }} </small>
-                        </h4>
+                    <div class="card-body text-center">
+                        <img width="300px" src="{{ asset('storage/productImages/' . $product->image) }}" alt="">
+                    </div>
+                </div>
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h5 class="m-0">Product Stock</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-sm table-bordered">
+                            @foreach($product->product_stocks as $stock)
+                                <tr>
+                                    <td>{{ $stock->size->size ?? '' }}</td>
+                                    <td>{{ $stock->location ?? '' }}</td>
+                                    <td>{{ $stock->quantity ?? '' }}</td>
+                                </tr>
+                            @endforeach
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- /.card-body -->
-    </div>
-    <!-- /.card -->
-
-</section>
-
+    </div><!-- /.container-fluid -->
+</div>
 @endsection

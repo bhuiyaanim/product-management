@@ -1,11 +1,15 @@
 // Categories
 export const GET_CATEGORIES = 'GET_CATEGORIES'
 
-// Attributes
-export const GET_ATTRIBUTES = 'GET_ATTRIBUTES'
+// Brands
+export const GET_BRANDS = 'GET_BRANDS'
+
+// Brands
+export const GET_SIZES = 'GET_SIZES'
 
 // Product
 export const ADD_PRODUCT = 'ADD_PRODUCT'
+export const EDIT_PRODUCT = 'EDIT_PRODUCT'
 
 
 

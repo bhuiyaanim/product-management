@@ -4,7 +4,7 @@ Vue.component('mutations', require('../../mutation-types').default);
 import * as mutations from '../../mutation-types'
 
 export default {
-    [mutations.SET_ATTRIBUTES](state, payload) {
-        state.attributes = payload
+    [mutations.SET_BRANDS](state, payload) {
+        state.brands = payload
     }
 }

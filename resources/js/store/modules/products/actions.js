@@ -10,7 +10,20 @@ export default {
     [actions.ADD_PRODUCT]({commit}, payload) {
         Axios.post('/products', payload)
         .then(res=>{
-
+            if (res.data.success == true) {
+                window.location.href = '/products'
+            }
+        })
+        .catch(err=>{
+            commit(mutations.SET_ERRORS, err.response.data.error)
+        })
+    },
+    [actions.EDIT_PRODUCT]({commit}, payload) {
+        Axios.post(`/products/${payload.id}`, payload.data)
+        .then(res=>{
+            if (res.data.success == true) {
+                window.location.href = '/products'
+            }
         })
         .catch(err=>{
             commit(mutations.SET_ERRORS, err.response.data.error)

@@ -39,8 +39,9 @@
                                     <th>#SL</th>
                                     <th class="text-center">Image</th>
                                     <th>Name</th>
-                                    <th>Slug</th>
-                                    <th>Price</th>
+                                    <th>SKU</th>
+                                    <th>Category</th>
+                                    <th>Brand</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -49,13 +50,15 @@
                                     <tr>
                                         <td>{{ ++$key }}</td>
                                         <td class="text-center">
-                                            <img width="64px" src="{{ asset('storage/productImage/'.$product->productImages[0]->product_image) }}" alt="">
+                                            <img width="64px" src="{{ asset('storage/productImages/' . $product->image) }}" alt="">
                                         </td>
                                         <td>{{ $product->name ?? '' }}</td>
-                                        <td>{{ $product->slug ?? '' }}</td>
-                                        <td>{{ $product->price ?? '' }}</td>
+                                        <td>{{ $product->sku ?? '' }}</td>
+                                        <td>{{ $product->category->name ?? '' }}</td>
+                                        <td>{{ $product->brand->name ?? '' }}</td>
                                         <td>
                                             <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-desktop"></i> Show</a>
+                                            <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-info"><i class="fa fa-edit"></i> Edit</a>
                                             <a href="javascript:" class="btn btn-sm btn-danger sa-delete" data-form-id="product-delete-{{ $product->id }}"><i class="fa fa-trash"></i> Delete</a>
                                             <form id="product-delete-{{ $product->id }}" action="{{ route('products.destroy', $product->id) }}" method="post">
                                                 @csrf
