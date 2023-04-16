@@ -215,4 +215,15 @@ class ProductsController extends Controller
         flash('Product deleted successfully')->success();
         return back();
     }
+
+    // handle AJAX request
+    public function getProductsJson()
+    {
+        $products = Product::with(['product_stocks.size'])->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $products
+        ], Response::HTTP_OK);
+    }
 }

@@ -42,6 +42,18 @@
                         <p>Products</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('stock') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Stocks</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('stockHistory') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Stocks History</p>
+                    </a>
+                </li>
             </ul>
             </li>
         </ul>

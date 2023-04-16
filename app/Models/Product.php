@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    protected $appends = ['product_image'];
+    protected $appends = ['product_image', 'text'];
 
     // Const
     public const STATUS_ACTIVE = 1;
@@ -17,6 +17,10 @@ class Product extends Model
     // Methods
     public function getProductImageAttribute() {
         return asset('storage/productImages/' . $this->image);
+    }
+
+    public function getTextAttribute() {
+        return $this->name;
     }
 
     // Relations
