@@ -54,6 +54,18 @@
                         <p>Stocks History</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('returnProducts') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Return Product</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('returnProductsHistory') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Return Product History</p>
+                    </a>
+                </li>
             </ul>
             </li>
         </ul>

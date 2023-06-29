@@ -12,6 +12,7 @@ Vue.component('example-component', require('./component/ExampleComponents.vue').
 Vue.component('product-add', require('./component/products/ProductAdd.vue').default);
 Vue.component('product-edit', require('./component/products/ProductEdit.vue').default);
 Vue.component('stock-manage', require('./component/stocks/StockManage.vue').default);
+Vue.component('return-product', require('./component/returnProducts/ReturnProduct.vue').default);
 
 import store from './store';
 
