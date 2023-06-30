@@ -42,7 +42,7 @@
                                     <th>SKU</th>
                                     <th>Category</th>
                                     <th>Brand</th>
-                                    <th>Action</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,7 +56,7 @@
                                         <td>{{ $product->sku ?? '' }}</td>
                                         <td>{{ $product->category->name ?? '' }}</td>
                                         <td>{{ $product->brand->name ?? '' }}</td>
-                                        <td>
+                                        <td class="text-center">
                                             <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-desktop"></i> Show</a>
                                             <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-info"><i class="fa fa-edit"></i> Edit</a>
                                             <a href="javascript:" class="btn btn-sm btn-danger sa-delete" data-form-id="product-delete-{{ $product->id }}"><i class="fa fa-trash"></i> Delete</a>

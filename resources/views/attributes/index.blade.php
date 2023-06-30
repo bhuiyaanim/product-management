@@ -38,7 +38,7 @@
                                 <tr>
                                     <th>#SL</th>
                                     <th>Name</th>
-                                    <th>Action</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,7 +46,7 @@
                                     <tr>
                                         <td>{{ ++$key }}</td>
                                         <td>{{ $attribute->name ?? '' }}</td>
-                                        <td>
+                                        <td class="text-center">
                                             <a href="{{ route('attributes.edit', $attribute->id) }}" class="btn btn-sm btn-info"><i class="fa fa-edit"></i> Edit</a>
                                             <a href="javascript:" class="btn btn-sm btn-danger sa-delete" data-form-id="attribute-delete-{{ $attribute->id }}"><i class="fa fa-trash"></i> Delete</a>
                                             <form id="attribute-delete-{{ $attribute->id }}" action="{{ route('attributes.destroy', $attribute->id) }}" method="post">

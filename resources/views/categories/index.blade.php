@@ -38,7 +38,7 @@
                                 <tr>
                                     <th>#SL</th>
                                     <th>Name</th>
-                                    <th>Action</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,7 +46,7 @@
                                     <tr>
                                         <td>{{ ++$key }}</td>
                                         <td>{{ $category->name ?? '' }}</td>
-                                        <td>
+                                        <td class="text-center">
                                             <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-sm btn-info"><i class="fa fa-edit"></i> Edit</a>
                                             <a href="javascript:" class="btn btn-sm btn-danger sa-delete" data-form-id="category-delete-{{ $category->id }}"><i class="fa fa-trash"></i> Delete</a>
                                             <form id="category-delete-{{ $category->id }}" action="{{ route('categories.destroy', $category->id) }}" method="post">
