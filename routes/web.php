@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use \App\Http\Controllers\UsersController;
 use \App\Http\Controllers\CategoriesController;
 use \App\Http\Controllers\BrandsController;
 use \App\Http\Controllers\SizesController;
@@ -38,6 +39,9 @@ Route::middleware([
 Route::post('/logout', [LogoutController::class, 'destroy'])->name('logout');
 
 Route::middleware(['auth:sanctum'])->group(function() {
+    // USERS
+    Route::resource('users', UsersController::class);
+
     // CATEGORY
     Route::resource('categories', CategoriesController::class);
     Route::get('/api/categories', [CategoriesController::class, 'getCategoriesJson']);
